@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 900,
+    "height": 400,
+    "title": "Covid-19 Tests Conducted Per 100k People on 1st July 2021",
+    "data": {
+      "url": "data/states-topo.json",
+      "format": {
+            "type": "topojson",
+            "feature": "layer1"
+          }
+    },
+    "transform": [
+      
+        {"lookup": "properties.Name",
+        "from": {
+          "data": {
+            "url": "data/tests_state_cleaned_copy.csv"
+          },
+          
+          "key": "State",
+          "fields": ["Tests_Per_100k", "Date"]
+        }
+      },
+      {"calculate": "datum.Tests_Per_100k", "as": "Tests Per 100k"}
+    ],
+    "projection": {
+      "type": "equalEarth"
+    },
+    "mark": {
+      "type": "geoshape",
+      "stroke": "#757575",
+      "strokeWidth": 0.5
+      },
+    "encoding": {
+      "color": {
+        "field": "Tests Per 100k",
+        "type": "quantitative",
+        "scale": {"range": ["white", "black"]}
+      },
+      "tooltip": [
+        {"field": "properties.Name", "type": "nominal", "title": "State"},
+        {"field": "State", "type": "nominal"},
+        {"field": "Date", "type": "nominal"},
+        {"field": "Tests Per 100k", "type": "quantitative", "format": ","}
+      ]
+    },
+    "config": {
+      "view": {
+        "strokeOpacity": 0,
+        "stroke": "black"
+      },
+      "title": {
+        "fontSize": 20
+      }
+    }
+  
+  }
+  
