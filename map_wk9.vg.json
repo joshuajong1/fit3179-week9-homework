@@ -36,7 +36,7 @@
       "color": {
         "field": "Tests Per 100k",
         "type": "quantitative",
-        "scale": {"range": ["white", "black"]}
+        "scale": {"range": ["white", "orange", "red"]}
       },
       "tooltip": [
         {"field": "properties.Name", "type": "nominal", "title": "State"},
